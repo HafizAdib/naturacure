@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naturacure/screens/home_screen.dart';
+import 'package:naturacure/screens/detail_screen.dart';
+// import 'package:naturacure/screens/home_sticky_screen.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -13,6 +15,7 @@ class LoginScreen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => HomeScreen()),
+              // MaterialPageRoute(builder: (_) => HomeScreenSticky()),
             );
           },
         ),

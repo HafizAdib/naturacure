@@ -4,41 +4,25 @@ import '../models/remede.dart';
 
 class ApiService {
 
-  static const baseUrl = "http://127.0.0.1:8000/api";
+  static const baseUrl = "http://192.168.43.148:8000/api"; // IP de ton PC
 
   static Future<List<Remede>> getRemedes() async {
-    final response = await http.get(Uri.parse("$baseUrl/remedes"));
-    final List data = jsonDecode(response.body);
+
+  final response = await http.get(Uri.parse("$baseUrl/remedes"));
+
+  print(response.body);
+  print(response.statusCode);
+
+  if (response.statusCode == 200) {
+
+    final Map<String, dynamic> jsonData = jsonDecode(response.body);
+
+    final List data = jsonData["remedes"];
+
     return data.map((e) => Remede.fromJson(e)).toList();
-  }
 
-  static Future<Remede> getRemede(int id) async {
-    final response =
-        await http.get(Uri.parse("$baseUrl/remedes/$id"));
-    return Remede.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception("Erreur API : ${response.statusCode}");
   }
-
-  static Future<void> likeRemede(int id, String token) async {
-    await http.post(
-      Uri.parse("$baseUrl/remedes/$id/like"),
-      headers: {
-        "Authorization": "Bearer $token"
-      },
-    );
-  }
-
-  static Future<void> commentRemede(
-      int id, String content, String token) async {
-
-    await http.post(
-      Uri.parse("$baseUrl/remedes/$id/comment"),
-      headers: {
-        "Authorization": "Bearer $token",
-        "Content-Type": "application/json"
-      },
-      body: jsonEncode({
-        "contenu": content
-      }),
-    );
-  }
+}
 }

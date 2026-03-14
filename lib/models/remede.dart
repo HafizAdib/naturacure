@@ -1,20 +1,21 @@
+import 'etape.dart';
+import 'maladie.dart';
+
 class Remede {
   final int id;
   final String nom;
   final String description;
-  final String maladie;
-  final String image;
-  final int likes;
-  final bool validated;
+  final String status;
+  final Maladie maladie; // <-- ici
+  final List<Etape> etapes;
 
   Remede({
     required this.id,
     required this.nom,
     required this.description,
+    required this.status,
     required this.maladie,
-    required this.image,
-    required this.likes,
-    required this.validated,
+    required this.etapes,
   });
 
   factory Remede.fromJson(Map<String, dynamic> json) {
@@ -22,10 +23,11 @@ class Remede {
       id: json['id'],
       nom: json['nom'],
       description: json['description'],
-      maladie: json['maladie'],
-      image: json['image'] ?? "",
-      likes: json['likes_count'] ?? 0,
-      validated: json['validated'] ?? false,
+      status: json['status'],
+      maladie: Maladie.fromJson(json['maladie']), // <-- parsing
+      etapes: (json['etapes'] as List)
+          .map((e) => Etape.fromJson(e))
+          .toList(),
     );
   }
 }
