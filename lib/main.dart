@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/app_theme.dart';
 import 'providers/auth_provider.dart';
-import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
+import 'services/session_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SessionService.init();
   runApp(NateraCureApp());
 }
 
@@ -18,7 +21,7 @@ class NateraCureApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
-        home: LoginScreen(),
+        home: HomeScreen(),
       ),
     );
   }

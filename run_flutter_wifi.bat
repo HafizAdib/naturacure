@@ -118,5 +118,4 @@ if %errorlevel% equ 0 (
 )
 
 echo [+] Lancement de Flutter sur %ip%...
-flutter run -d %ip%:5555
-pause
+flutter run -d %ip%:5555 -v 

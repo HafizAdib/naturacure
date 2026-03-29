@@ -3,19 +3,17 @@ import '../models/remede.dart';
 
 Widget remedyCard({
   required Remede remede,
-  VoidCallback? onFavorite,
-  VoidCallback? onComment,
-  VoidCallback? onTapCard,
+    VoidCallback? onTapCard,
 }) {
   return GestureDetector(
     onTap: onTapCard,
     child: Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 1),
       child: Card(
-        elevation: 6,
+        elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
         ),
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -67,41 +65,7 @@ Widget remedyCard({
                   // Liste des étapes
                   ...remede.etapes.map((e) => Text('${e.ordre}. ${e.description}')),
                   const SizedBox(height: 15),
-                  const Divider(),
-                  // Boutons Favori et Commenter
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            if (onFavorite != null) onFavorite();
-                          },
-                          child: Row(
-                            children: const [
-                              Icon(Icons.favorite_border, color: Colors.red),
-                              SizedBox(width: 4),
-                              Text(""),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        InkWell(
-                          onTap: () {
-                            if (onComment != null) onComment();
-                          },
-                          child: Row(
-                            children: const [
-                              Icon(Icons.comment_outlined, color: Colors.blue),
-                              SizedBox(width: 4),
-                              Text(""),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  
                 ],
               ),
             )

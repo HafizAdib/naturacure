@@ -1,43 +1,46 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../services/session_service.dart';
 import 'home_screen.dart';
-import 'register_screen.dart'; // <-- Assure-toi de créer cet écran
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
 
   bool loading = false;
 
-  /// Méthode pour se connecter et enregistrer la session
-  void login() async {
+  void register() async {
+    if (passwordController.text != passwordConfirmController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Les mots de passe ne correspondent pas")),
+      );
+      return;
+    }
+
     setState(() => loading = true);
 
     try {
-      // Appel API pour login (doit renvoyer 'token' et 'user')
-      final response = await ApiService.loginWithUser(
+      final response = await ApiService.register(
+        nameController.text,
         emailController.text,
         passwordController.text,
       );
 
-      // Enregistrement du token et des infos utilisateur
+      // Enregistrement du token et info utilisateur
       SessionService.login(
         response['token'] as String,
         Map<String, dynamic>.from(response['user'] as Map),
       );
 
-      print("User session: ${SessionService.user}");
-
-      // Navigation vers HomeScreen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -54,21 +57,23 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Créer un compte"),
+        backgroundColor: Colors.green,
+      ),
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "NaturaCure",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: "Nom",
+                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
@@ -85,34 +90,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: passwordConfirmController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Confirmer le mot de passe",
+                  border: OutlineInputBorder(),
+                ),
+              ),
               const SizedBox(height: 30),
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: loading ? null : login,
+                  onPressed: loading ? null : register,
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   child: loading
                       ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text("Connexion"),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Bouton "Pas de compte ? Créer"
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RegisterScreen(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "Pas de compte ? Créer",
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      : const Text("Créer mon compte"),
                 ),
               ),
             ],

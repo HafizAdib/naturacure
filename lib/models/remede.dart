@@ -6,8 +6,13 @@ class Remede {
   final String nom;
   final String description;
   final String status;
-  final Maladie maladie; // <-- ici
+  final Maladie maladie;
   final List<Etape> etapes;
+
+  // Champs ajoutés pour commentaires et likes
+  List<dynamic>? commentaires; // pour stocker les commentaires
+  int? likes; // nombre de likes
+  bool? liked; // si l'utilisateur a liké
 
   Remede({
     required this.id,
@@ -16,6 +21,9 @@ class Remede {
     required this.status,
     required this.maladie,
     required this.etapes,
+    this.commentaires,
+    this.likes,
+    this.liked,
   });
 
   factory Remede.fromJson(Map<String, dynamic> json) {
@@ -24,10 +32,13 @@ class Remede {
       nom: json['nom'],
       description: json['description'],
       status: json['status'],
-      maladie: Maladie.fromJson(json['maladie']), // <-- parsing
+      maladie: Maladie.fromJson(json['maladie']),
       etapes: (json['etapes'] as List)
           .map((e) => Etape.fromJson(e))
           .toList(),
+      commentaires: json['commentaires'] ?? [],
+      likes: json['likes'] ?? 0,
+      liked: json['liked'] ?? false,
     );
   }
 }
