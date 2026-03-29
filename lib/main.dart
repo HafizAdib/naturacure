@@ -20,7 +20,7 @@ class NateraCureApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
+        theme: AppTheme.dark,
         home: HomeScreen(),
       ),
     );

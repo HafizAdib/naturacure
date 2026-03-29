@@ -11,4 +11,13 @@ class AppTheme {
       elevation: 0,
     ),
   );
+  static ThemeData dark = ThemeData(
+    primaryColor: Color(0x002E7D32),
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color(0x002E7D32),
+      elevation: 0,
+    ),
+  );
 }
