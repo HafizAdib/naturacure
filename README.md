@@ -1,8 +1,8 @@
-# 📱 NaTéraCure Mobile App
+# 📱 NaturaCure Mobile App
 
-Application mobile développée avec **Flutter** pour la plateforme **NaTéraCure (Nature Thérapeutique Cure)**.
+Application mobile développée avec **Flutter** pour la plateforme **NaturaCure (Nature Thérapeutique Cure)**.
 
-NaTéraCure est une application permettant de recenser, consulter et partager des produits thérapeutiques traditionnels à travers une interface moderne, interactive et intuitive.
+NaturaCure est une application permettant de recenser, consulter et partager des produits thérapeutiques traditionnels à travers une interface moderne, interactive et intuitive.
 
 ---
 
@@ -98,13 +98,13 @@ lib/
 
 1. Cloner le projet
 
-git clone https://github.com/ton-repo/nateracure
+git clone [https://github.com/HafizAdib/naturacure](https://github.com/HafizAdib/naturacure)
 
 2. Accéder au dossier
 
-cd nateracure-mobile
+cd nateracure
 
-3. Installer les dépendances
+1. Installer les dépendances
 
 flutter pub get
 
@@ -161,17 +161,17 @@ Les informations disponibles dans l’application sont fournies à titre informa
 
 ---
 
-## 👨🏽‍💻 Auteurs
+## Auteurs
 
-Abdoul Halim Hafiz Adib
-Idrissou Bouba
-Ngah David Ulrich
-Ngathuessi Tagne Stéphane
+* Abdoul Halim Hafiz Adib
+* Idrissou Bouba
+* Ngah David Ulrich
+* Ngathuessi Tagne Stéphane
 
 Projet académique du Developpement mobile
 
 ---
 
-# 🌿 NaTéraCure
+# 🌿 NaturaCure
 
 ### La puissance de la nature au service de la santé
